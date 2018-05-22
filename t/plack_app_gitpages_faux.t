@@ -1,6 +1,5 @@
 use Test2::V0 -no_srand => 1;
 use Plack::App::GitHubPages::Faux;
-use Test2::Tools::HTTP ();
 use Importer 'Test2::Tools::HTTP' => ':short';
 use HTTP::Request::Common;
 use Path::Tiny qw( path );
