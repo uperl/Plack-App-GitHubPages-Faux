@@ -11,7 +11,6 @@ my $post_diag;
 
 $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
-  File::Spec
   HTTP::Request::Common
   Importer
   Path::Tiny
@@ -19,7 +18,6 @@ $modules{$_} = $_ for qw(
   Test2::Todo
   Test2::Tools::HTTP
   Test2::V0
-  parent
 );
 
 
