@@ -1,4 +1,4 @@
-package Plack::App::GitPages::Faux {
+package Plack::App::GitHubPages::Faux {
 
   use strict;
   use warnings;
@@ -10,7 +10,7 @@ package Plack::App::GitPages::Faux {
   
 =head1 SYNOPSIS
 
- use Plack::App::GitPages::Faux;
+ use Plack::App::GitHubPages::Faux;
  
  my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
 

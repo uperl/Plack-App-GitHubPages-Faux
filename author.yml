@@ -12,4 +12,4 @@ pod_coverage:
   # format is "Class#method" or "Class",regex allowed
   # for either Class or method.
   private:
-    - Plack::App::GitPages::Faux
+    - Plack::App::GitHubPages::Faux

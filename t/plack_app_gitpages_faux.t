@@ -1,5 +1,5 @@
 use Test2::V0 -no_srand => 1;
-use Plack::App::GitPages::Faux;
+use Plack::App::GitHubPages::Faux;
 use Test2::Tools::HTTP ();
 use Importer 'Test2::Tools::HTTP' => ':short';
 use HTTP::Request::Common;
@@ -10,7 +10,7 @@ foreach my $root (path('corpus')->children)
 {
   my $url  = "http://@{[ $root->basename ]}";
 
-  my $app = Plack::App::GitPages::Faux->new(root => "$root")->to_app;
+  my $app = Plack::App::GitHubPages::Faux->new(root => "$root")->to_app;
 
   note "adding app at $url";
   app $url => $app;
