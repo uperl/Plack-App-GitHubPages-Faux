@@ -54,13 +54,11 @@ as the body for 404 Not Found responses.
     if(-d $path)
     {
       my $uri = $env->{PATH_INFO};
+      my $index = File::Spec->catfile($path, 'index.html');
+      return $self->return_404 unless -f $index;
       if($uri =~ m{/$})
       {
-        my $index = File::Spec->catfile($path, 'index.html');
-        if(-f $index)
-        {
-          $path = $index;
-        }
+        $path = $index;
       }
       else
       {
@@ -85,7 +83,11 @@ as the body for 404 Not Found responses.
     my $file = File::Spec->catfile($self->root, '404.html');
     
     -f $file
-      ? $self->serve_path(undef, $file)
+      ? do {
+        my $res = $self->serve_path(undef, $file);
+        $res->[0] = '404';
+        $res;
+      }
       : $self->SUPER::return_404;
   }
 

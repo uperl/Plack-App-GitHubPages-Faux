@@ -45,6 +45,7 @@ req
   GET('http://something1.test/notfound'),
   res {
     code 404;
+    content_type 'text/plain';
   },
   'normal not found';
 
@@ -108,6 +109,71 @@ req
     content_length_ok;
   },
   'index file';
+
+tx->note;
+
+req
+  GET('http://custom404.test/missing'),
+  res {
+    code 404;
+    content "<html>custom 404</html>\n";
+    content_type 'text/html';
+    charset 'UTF-8';
+    content_length_ok;
+  },
+  'custom 404 page';
+
+tx->note;
+
+req
+  GET('http://custom404.test/'),
+  res {
+    code 404;
+    content "<html>custom 404</html>\n";
+    content_type 'text/html';
+    charset 'UTF-8';
+    content_length_ok;
+  },
+  '404 on root with no /index.html';
+
+tx->note;
+
+req
+  GET('http://custom404.test'),
+  res {
+    code 404;
+    content "<html>custom 404</html>\n";
+    content_type 'text/html';
+    charset 'UTF-8';
+    content_length_ok;
+  },
+  '404 on root with no /index.html without redirect';
+
+tx->note;
+
+req
+  GET('http://custom404.test/foo/'),
+  res {
+    code 404;
+    content "<html>custom 404</html>\n";
+    content_type 'text/html';
+    charset 'UTF-8';
+    content_length_ok;
+  },
+  '404 on directory with no index.html without redirect';
+
+tx->note;
+
+req
+  GET('http://custom404.test/foo'),
+  res {
+    code 404;
+    content "<html>custom 404</html>\n";
+    content_type 'text/html';
+    charset 'UTF-8';
+    content_length_ok;
+  },
+  '404 on directory with no index.html without redirect';
 
 tx->note;
 
