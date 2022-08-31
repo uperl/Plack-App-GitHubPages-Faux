@@ -5,7 +5,7 @@ package Plack::App::GitHubPages::Faux {
   use 5.020;
   use parent 'Plack::App::File';
   use experimental qw( signatures postderef );
-  use File::Spec;
+  use Path::Tiny qw( path );
 
   # ABSTRACT: PSGI app to test your GitHub Pages site
 
@@ -52,7 +52,7 @@ as the body for 404 Not Found responses.
     if(-d $path)
     {
       my $uri = $env->{PATH_INFO};
-      my $index = File::Spec->catfile($path, 'index.html');
+      my $index = path($path)->child('index.html')->stringify;
       return $self->return_404 unless -f $index;
       if($uri =~ m{/$})
       {
@@ -77,7 +77,7 @@ as the body for 404 Not Found responses.
 
   sub return_404 ($self)
   {
-    my $file = File::Spec->catfile($self->root, '404.html');
+    my $file = path($self->root)->child('404.html')->stringify;
 
     -f $file
       ? do {
