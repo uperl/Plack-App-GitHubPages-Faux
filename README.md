@@ -1,12 +1,14 @@
-# Plack::App::GitHubPages::Faux [![Build Status](https://secure.travis-ci.org/plicease/Plack-App-GitHubPages-Faux.png)](http://travis-ci.org/plicease/Plack-App-GitHubPages-Faux)
+# Plack::App::GitHubPages::Faux
 
 PSGI app to test your GitHub Pages site
 
 # SYNOPSIS
 
-    use Plack::App::GitHubPages::Faux;
-    
-    my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
+```perl
+use Plack::App::GitHubPages::Faux;
+
+my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
+```
 
 # DESCRIPTION
 

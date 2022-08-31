@@ -12,7 +12,7 @@ foreach my $root (path('corpus')->children)
   my $app = Plack::App::GitHubPages::Faux->new(root => "$root")->to_app;
 
   note "adding app at $url";
-  app $url => $app;
+  app_add $url => $app;
 }
 
 req
