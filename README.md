@@ -1,4 +1,4 @@
-# Plack::App::GitHubPages::Faux
+# Plack::App::GitHubPages::Faux ![static](https://github.com/plicease/Plack-App-GitHubPages-Faux/workflows/static/badge.svg) ![linux](https://github.com/plicease/Plack-App-GitHubPages-Faux/workflows/linux/badge.svg)
 
 PSGI app to test your GitHub Pages site
 

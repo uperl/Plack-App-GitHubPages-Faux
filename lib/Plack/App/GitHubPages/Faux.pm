@@ -7,7 +7,7 @@ package Plack::App::GitHubPages::Faux {
   use File::Spec;
 
   # ABSTRACT: PSGI app to test your GitHub Pages site
-  
+
 =head1 SYNOPSIS
 
  use Plack::App::GitHubPages::Faux;
@@ -46,7 +46,7 @@ as the body for 404 Not Found responses.
     my($self, $file) = @_;
     return -f $file || -d $file;
   }
-  
+
   sub serve_path
   {
     my($self, $env, $path, $fullpath) = @_;
@@ -73,15 +73,15 @@ as the body for 404 Not Found responses.
           ];
       }
     }
-    
+
     return $self->SUPER::serve_path($env, $path, $fullpath);
   }
-  
+
   sub return_404
   {
     my($self) = @_;
     my $file = File::Spec->catfile($self->root, '404.html');
-    
+
     -f $file
       ? do {
         my $res = $self->serve_path(undef, $file);
