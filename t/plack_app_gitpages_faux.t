@@ -1,3 +1,4 @@
+use utf8;
 use Test2::V0 -no_srand => 1;
 use Plack::App::GitHubPages::Faux;
 use Importer 'Test2::Tools::HTTP' => ':short';
@@ -12,7 +13,7 @@ foreach my $root (path('corpus')->children)
   my $app = Plack::App::GitHubPages::Faux->new(root => "$root")->to_app;
 
   note "adding app at $url";
-  app $url => $app;
+  app_add $url => $app;
 }
 
 req

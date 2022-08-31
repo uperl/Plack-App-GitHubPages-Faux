@@ -1,19 +1,22 @@
-# Plack::App::GitHubPages::Faux [![Build Status](https://secure.travis-ci.org/plicease/Plack-App-GitHubPages-Faux.png)](http://travis-ci.org/plicease/Plack-App-GitHubPages-Faux)
+# Plack::App::GitHubPages::Faux ![static](https://github.com/plicease/Plack-App-GitHubPages-Faux/workflows/static/badge.svg) ![linux](https://github.com/plicease/Plack-App-GitHubPages-Faux/workflows/linux/badge.svg)
 
 PSGI app to test your GitHub Pages site
 
 # SYNOPSIS
 
-    use Plack::App::GitHubPages::Faux;
-    
-    my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
+```perl
+use Plack::App::GitHubPages::Faux;
+
+my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
+```
 
 # DESCRIPTION
 
 This is a static file server PSGI application with some tweaks to operate similar
 to a GitHub Pages website so that you can do some testing to see if your site
-looks right before committing.  It is a pretty simple minded subclass of
-[Plack::App::File](https://metacpan.org/pod/Plack::App::File) with these feature additions:
+looks right before committing.  It could also be useful in unit tests for your
+static site.  It is a pretty simple minded subclass of [Plack::App::File](https://metacpan.org/pod/Plack::App::File) with
+these feature additions:
 
 - serve `index.html` files for directory indexes
 
@@ -26,8 +29,9 @@ looks right before committing.  It is a pretty simple minded subclass of
 
 - serve `404.html` for not found
 
-    If you have a `404.html` in your document root, this will be served
-    as the body for 404 Not Found responses.
+    You can customize your 404 response on GitHub pages by putting a `404.html`
+    in the document root.  This module will serve that for 404s so that you
+    can see the 404s the way they will be displayed on GitHub pages.
 
 # SEE ALSO
 
@@ -39,7 +43,7 @@ Graham Ollis <plicease@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2018 by Graham Ollis.
+This software is copyright (c) 2018-2022 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

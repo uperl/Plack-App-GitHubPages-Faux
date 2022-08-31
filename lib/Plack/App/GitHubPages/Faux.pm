@@ -2,12 +2,13 @@ package Plack::App::GitHubPages::Faux {
 
   use strict;
   use warnings;
-  use 5.014;
+  use 5.020;
   use parent 'Plack::App::File';
-  use File::Spec;
+  use experimental qw( signatures postderef );
+  use Path::Tiny qw( path );
 
   # ABSTRACT: PSGI app to test your GitHub Pages site
-  
+
 =head1 SYNOPSIS
 
  use Plack::App::GitHubPages::Faux;
@@ -18,8 +19,9 @@ package Plack::App::GitHubPages::Faux {
 
 This is a static file server PSGI application with some tweaks to operate similar
 to a GitHub Pages website so that you can do some testing to see if your site
-looks right before committing.  It is a pretty simple minded subclass of
-L<Plack::App::File> with these feature additions:
+looks right before committing.  It could also be useful in unit tests for your
+static site.  It is a pretty simple minded subclass of L<Plack::App::File> with
+these feature additions:
 
 =over 4
 
@@ -34,27 +36,25 @@ This is important to get the right relative URLs in your indexes.
 
 =item serve C<404.html> for not found
 
-If you have a C<404.html> in your document root, this will be served
-as the body for 404 Not Found responses.
+You can customize your 404 response on GitHub pages by putting a C<404.html>
+in the document root.  This module will serve that for 404s so that you
+can see the 404s the way they will be displayed on GitHub pages.
 
 =back
 
 =cut
 
-  sub should_handle
+  sub should_handle ($self, $file)
   {
-    my($self, $file) = @_;
     return -f $file || -d $file;
   }
-  
-  sub serve_path
-  {
-    my($self, $env, $path, $fullpath) = @_;
 
+  sub serve_path ($self, $env, $path, $fullpath=undef)
+  {
     if(-d $path)
     {
       my $uri = $env->{PATH_INFO};
-      my $index = File::Spec->catfile($path, 'index.html');
+      my $index = path($path)->child('index.html')->stringify;
       return $self->return_404 unless -f $index;
       if($uri =~ m{/$})
       {
@@ -73,15 +73,14 @@ as the body for 404 Not Found responses.
           ];
       }
     }
-    
+
     return $self->SUPER::serve_path($env, $path, $fullpath);
   }
-  
-  sub return_404
+
+  sub return_404 ($self)
   {
-    my($self) = @_;
-    my $file = File::Spec->catfile($self->root, '404.html');
-    
+    my $file = path($self->root)->child('404.html')->stringify;
+
     -f $file
       ? do {
         my $res = $self->serve_path(undef, $file);
