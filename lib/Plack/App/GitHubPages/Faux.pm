@@ -19,8 +19,9 @@ package Plack::App::GitHubPages::Faux {
 
 This is a static file server PSGI application with some tweaks to operate similar
 to a GitHub Pages website so that you can do some testing to see if your site
-looks right before committing.  It is a pretty simple minded subclass of
-L<Plack::App::File> with these feature additions:
+looks right before committing.  It could also be useful in unit tests for your
+static site.  It is a pretty simple minded subclass of L<Plack::App::File> with
+these feature additions:
 
 =over 4
 
@@ -35,8 +36,9 @@ This is important to get the right relative URLs in your indexes.
 
 =item serve C<404.html> for not found
 
-If you have a C<404.html> in your document root, this will be served
-as the body for 404 Not Found responses.
+You can customize your 404 response on GitHub pages by putting a C<404.html>
+in the document root.  This module will serve that for 404s so that you
+can see the 404s the way they will be displayed on GitHub pages.
 
 =back
 
@@ -47,7 +49,7 @@ as the body for 404 Not Found responses.
     return -f $file || -d $file;
   }
 
-  sub serve_path ($self, $env, $path=undef, $fullpath=undef)
+  sub serve_path ($self, $env, $path, $fullpath=undef)
   {
     if(-d $path)
     {
