@@ -1,3 +1,4 @@
+use utf8;
 use Test2::V0 -no_srand => 1;
 use Plack::App::GitHubPages::Faux;
 use Importer 'Test2::Tools::HTTP' => ':short';
