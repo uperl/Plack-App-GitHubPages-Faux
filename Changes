@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix glaring mistake in synopsis (gh#2)
 
 0.02      2022-08-31 11:12:14 -0600
   - initial version
