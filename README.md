@@ -7,7 +7,7 @@ PSGI app to test your GitHub Pages site
 ```perl
 use Plack::App::GitHubPages::Faux;
 
-my $app = Plack::App::File->new( root => "/path/to/htdocs" )->to_app;
+my $app = Plack::App::GitHubPages::Faux->new( root => "/path/to/htdocs" )->to_app;
 ```
 
 # DESCRIPTION
