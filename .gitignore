@@ -1,2 +1,4 @@
 /Plack-App-GitHubPages-Faux-*
 /.build
+*.old
+*.orig
