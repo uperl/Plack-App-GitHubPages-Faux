@@ -34,6 +34,12 @@ file, that index will be served as a response.
 
 This is important to get the right relative URLs in your indexes.
 
+=item serve C<.html> files without the C<.html> extension
+
+If a request is made for C</foo> and there is no file or directory
+named C<foo>, but there is a C<foo.html>, then C<foo.html> will be
+served.
+
 =item serve C<404.html> for not found
 
 You can customize your 404 response on GitHub pages by putting a C<404.html>
@@ -47,6 +53,23 @@ can see the 404s the way they will be displayed on GitHub pages.
   sub should_handle ($self, $file)
   {
     return -f $file || -d $file;
+  }
+
+  sub locate_file ($self, $env)
+  {
+    my $path_info = $env->{PATH_INFO} // '';
+
+    if($path_info ne '' && $path_info !~ m{/$})
+    {
+      my $file = ($self->root // '.') . $path_info;
+      if(!-e $file && -f "$file.html")
+      {
+        local $env->{PATH_INFO} = "$path_info.html";
+        return $self->SUPER::locate_file($env);
+      }
+    }
+
+    return $self->SUPER::locate_file($env);
   }
 
   sub serve_path ($self, $env, $path, $fullpath=undef)

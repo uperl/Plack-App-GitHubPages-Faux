@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Serve /foo.html for requests to /foo, like GitHub Pages
 
 0.03      2022-09-13 04:55:14 -0600
   - Fix glaring mistake in synopsis (gh#2)
