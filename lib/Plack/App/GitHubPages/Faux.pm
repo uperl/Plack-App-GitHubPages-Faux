@@ -2,9 +2,8 @@ package Plack::App::GitHubPages::Faux {
 
   use strict;
   use warnings;
-  use 5.020;
+  use 5.036;
   use parent 'Plack::App::File';
-  use experimental qw( signatures postderef );
   use Path::Tiny qw( path );
 
   # ABSTRACT: PSGI app to test your GitHub Pages site
