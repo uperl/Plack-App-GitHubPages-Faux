@@ -2,7 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Serve /foo.html for requests to /foo, like GitHub Pages (gh#4)
-  - Require Perl 5.036
+  - Require Perl 5.036 (gh#4)
 
 0.03      2022-09-13 04:55:14 -0600
   - Fix glaring mistake in synopsis (gh#2)
